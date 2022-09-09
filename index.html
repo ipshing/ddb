@@ -10,17 +10,40 @@
             integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
             crossorigin="anonymous"
         />
-        <script type="module" crossorigin src="./assets/index.804a9307.js"></script>
-        <link rel="stylesheet" href="./assets/index.84d7017f.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
+      <script type="module" crossorigin src="./assets/index.cf7a74f3.js"></script>
+      <link rel="stylesheet" href="./assets/index.4e730c7d.css">
     </head>
     <body>
         <div id="app"></div>
         <div class="modal fade" id="backdropModal" tabindex="-1" aria-labelledby="backdropModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
                     <div class="modal-body">
                         <div class="container-flud">
                             <img class="img-fluid rounded" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="frameModal" tabindex="-1" aria-labelledby="frameModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-flud">
+                            <div class="frame-container mx-auto">
+                                <img class="img-fluid rounded d-none" />
+                                <div class="frame-animation d-none"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -31,11 +54,41 @@
             backdropModal.addEventListener("show.bs.modal", (event) => {
                 // Button that triggered the modal
                 const button = event.relatedTarget;
-                // Extract url
+                // Extract data
+                const title = button.getAttribute("data-bs-title");
                 const url = button.getAttribute("data-bs-url");
                 // Update modal's content
+                const modalTitle = backdropModal.querySelector(".modal-title");
+                modalTitle.textContent = title;
                 const modalImage = backdropModal.querySelector(".modal-body img");
                 modalImage.setAttribute("src", url);
+            });
+
+            const frameModal = document.getElementById("frameModal");
+            frameModal.addEventListener("show.bs.modal", (event) => {
+                // Button that triggered the modal
+                const button = event.relatedTarget;
+                // Extract data
+                const title = button.getAttribute("data-bs-title");
+                const url = button.getAttribute("data-bs-url");
+                const isAnimated = button.getAttribute("data-bs-animated");
+                // Update modal's content
+                const modalTitle = frameModal.querySelector(".modal-title");
+                modalTitle.textContent = title;
+                const animation = frameModal.querySelector(".modal-body .frame-animation");
+                const modalImage = frameModal.querySelector(".modal-body img");
+                if (isAnimated === "true") {
+                    animation.classList.remove("d-none");
+                    modalImage.classList.add("d-none");
+                    animation.setAttribute(
+                        "style",
+                        "background-image: url('" + url + "'); background-position: 0px 0px; background-repeat: no-repeat; background-size: 1240px 1240px;"
+                    );
+                } else {
+                    modalImage.classList.remove("d-none");
+                    animation.classList.add("d-none");
+                    modalImage.setAttribute("src", url);
+                }
             });
         </script>
         <script
@@ -43,5 +96,6 @@
             integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
             crossorigin="anonymous"
         ></script>
+        
     </body>
 </html>
