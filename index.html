@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Character Sheet Decorations</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+            crossorigin="anonymous"
+        />
+      <script type="module" crossorigin src="/index.f40c1db9.js"></script>
+      <link rel="stylesheet" href="/index.84d7017f.css">
+    </head>
+    <body>
+        <div id="app"></div>
+        <div class="modal fade" id="backdropModal" tabindex="-1" aria-labelledby="backdropModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="container-flud">
+                            <img class="img-fluid rounded" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            const backdropModal = document.getElementById("backdropModal");
+            backdropModal.addEventListener("show.bs.modal", (event) => {
+                // Button that triggered the modal
+                const button = event.relatedTarget;
+                // Extract url
+                const url = button.getAttribute("data-bs-url");
+                // Update modal's content
+                const modalImage = backdropModal.querySelector(".modal-body img");
+                modalImage.setAttribute("src", url);
+            });
+        </script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+            crossorigin="anonymous"
+        ></script>
+        
+    </body>
+</html>
